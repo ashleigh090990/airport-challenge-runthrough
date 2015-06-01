@@ -1,4 +1,4 @@
-require 'plane'
+require_relative 'plane'
 
 class Airport
 
@@ -9,8 +9,13 @@ class Airport
   end
 
   def lands(plane)
-    @status = 'landed'
+    plane.land
     @hangar << (plane)
+  end
+
+  def takeoff(plane)
+    plane.takes_off
+    @hangar.pop
   end
 
 end
