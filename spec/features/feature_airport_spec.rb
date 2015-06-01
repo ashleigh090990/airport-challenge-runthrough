@@ -15,4 +15,9 @@ feature 'Working Airport' do
     airport.takeoff(plane)
     expect(plane.status).to eq('flying')
   end
+
+  scenario 'not allow plane to land when hanger full' do
+    6.times { airport.lands(plane) }
+    expect{airport.lands(plane)}.to raise_error("Airport is full")
+  end
 end

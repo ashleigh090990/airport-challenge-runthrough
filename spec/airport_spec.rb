@@ -18,4 +18,11 @@ describe Airport do
     expect(subject.hangar).to be_empty
   end
 
+  it 'has a capacity of 6' do
+    plane = double :plane
+    allow(plane).to receive(:land)
+    6.times{ subject.lands(plane) }
+    expect(subject.hangar.count).to eq(6)
+  end
+
 end
