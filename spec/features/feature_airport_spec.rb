@@ -25,14 +25,17 @@ feature 'Working Airport' do
     expect{airport.lands(plane)}.to raise_error("Airport is full")
   end
 
-
-
   scenario 'plane can\'t land if stormy' do
     allow(airport).to receive(:forecast).and_return("stormy")
     expect{airport.lands(plane)}.to raise_error('Stormy weather do not land')
 
   end
 
-  scernario
+  scenario 'plane cannot take off if stormy' do
+    allow(airport).to receive(:forecast).and_return("sunny")
+    airport.lands(plane)
+    allow(airport).to receive(:forecast).and_return("stormy")
+    expect{airport.takeoff(plane)}.to raise_error('Stormy weather, cannot take-off')
+  end
 
 end

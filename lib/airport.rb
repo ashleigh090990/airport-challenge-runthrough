@@ -26,8 +26,12 @@ class Airport
   end
 
   def takeoff(plane)
-    plane.takes_off
-    @hangar.pop
+    if self.forecast == 'stormy'
+      fail "Stormy weather, cannot take-off"
+    else
+      plane.takes_off
+      @hangar.pop
+    end
   end
 
 end
