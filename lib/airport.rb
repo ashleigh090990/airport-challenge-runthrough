@@ -1,6 +1,9 @@
 require_relative 'plane'
+require_relative 'weather'
 
 class Airport
+
+  include Weather
 
   attr_accessor :hangar, :capacity
 
@@ -12,8 +15,10 @@ class Airport
   end
 
   def lands(plane)
-    plane.land
-    if @hangar.count < @capacity
+    if self.forecast == 'stormy'
+      fail "Stormy weather do not land"
+    elsif @hangar.count < @capacity && self.forecast == 'sunny'
+        plane.land
         @hangar << (plane)
     else
         fail "Airport is full"
